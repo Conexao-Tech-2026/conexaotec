@@ -1,0 +1,26 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./arquivos/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    networks:
+      - frontend
+
+  node1:
+    build: ./arquivos/node_app1/
+    ports:
+      - 3000:3000
+    networks:
+      - frontend
+  
+  node2:
+    build: ./arquivos/node_app2/
+  
+  node3:
+    build: ./arquivos/node_app3/
+
+networks:
+  frontend:
+    driver: bridge
