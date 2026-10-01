@@ -3,24 +3,23 @@ services:
     image: nginx:latest
     volumes:
       - ./arquivos/nginx/conf.d:/etc/nginx/conf.d
+      - ./arquivos/nginx/certs/server.crt:/etc/ssl/certs/server.crt
+      - ./arquivos/nginx/certs/server.key:/etc/ssl/certs/server.key
     ports:
       - 80:80
+      - 443:443
     networks:
       - frontend
 
-  node1:
-    build: ./arquivos/node_app1/
-    ports:
-      - 3000:3000
+  node:
+    build: ./arquivos/node_app/
+    networks:
+      - frontend
+  python:
+    build: ./arquivos/python_app/
     networks:
       - frontend
   
-  node2:
-    build: ./arquivos/node_app2/
-  
-  node3:
-    build: ./arquivos/node_app3/
-
 networks:
   frontend:
     driver: bridge
