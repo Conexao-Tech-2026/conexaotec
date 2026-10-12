@@ -2,15 +2,17 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./arquivos/nginx/conf.d:/etc/nginx/conf.d
-      - ./arquivos/nginx/certs/server.crt:/etc/ssl/certs/server.crt
-      - ./arquivos/nginx/certs/server.key:/etc/ssl/certs/server.key
+      - ./arquivos/nginx_files/nginx/:/etc/nginx/
+      - ./arquivos/nginx_files/certs/server.crt:/etc/ssl/certs/server.crt
+      - ./arquivos/nginx_files/certs/server.key:/etc/ssl/certs/server.key
     ports:
       - 80:80
       - 443:443
     networks:
       - frontend
-
+    depends_on:
+      - node
+      - python
   node:
     build: ./arquivos/node_app/
     networks:
