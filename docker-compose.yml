@@ -1,4 +1,5 @@
 services:
+  # Container NGINX
   nginx:
     image: nginx:latest
     volumes:
@@ -13,15 +14,18 @@ services:
     depends_on:
       - node
       - python
+  # Container Node
   node:
     build: ./arquivos/node_app/
     networks:
       - frontend
+  # Container Python
   python:
     build: ./arquivos/python_app/
     networks:
       - frontend
-  
+ 
+# Define configurações da rede Interna usada para comunicação entre os containers
 networks:
   frontend:
     driver: bridge
