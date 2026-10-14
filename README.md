@@ -1,3 +1,3 @@
-# conexaotec
+# conexaotech
 
-## Para o Conexão tec
+## Para o Conexão tech
