@@ -19,7 +19,7 @@ console.log(`IP do cliente: ${ip}`);
     res.end(`
         <h1>Hello from Node 1</h1>
         <p>Seu IP é: <strong>${ip}</strong></p>
-	<p>Host da requisição: ${host}</p>
+	    <p>Host da requisição: ${host}</p>
     `);
 	
 });
