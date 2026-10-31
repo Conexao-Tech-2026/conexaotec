@@ -1,25 +1,31 @@
 services:
+  # Container NGINX
   nginx:
     image: nginx:latest
     volumes:
-      - ./arquivos/nginx/conf.d:/etc/nginx/conf.d
-      - ./arquivos/nginx/certs/server.crt:/etc/ssl/certs/server.crt
-      - ./arquivos/nginx/certs/server.key:/etc/ssl/certs/server.key
+      - ./arquivos/nginx_files/nginx/:/etc/nginx/
+      - ./arquivos/nginx_files/certs/server.crt:/etc/ssl/certs/server.crt
+      - ./arquivos/nginx_files/certs/server.key:/etc/ssl/certs/server.key
     ports:
       - 80:80
       - 443:443
     networks:
       - frontend
-
+    depends_on:
+      - node
+      - python
+  # Container Node
   node:
     build: ./arquivos/node_app/
     networks:
       - frontend
+  # Container Python
   python:
     build: ./arquivos/python_app/
     networks:
       - frontend
-  
+ 
+# Define configurações da rede Interna usada para comunicação entre os containers
 networks:
   frontend:
     driver: bridge

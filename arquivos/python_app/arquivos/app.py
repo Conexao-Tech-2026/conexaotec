@@ -2,8 +2,9 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def home(path):
     ip = request.headers.get("X-Forwarded-For", request.remote_addr)
     return f"Seu IP é: {ip}"
 
