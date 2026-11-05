@@ -17,8 +17,10 @@ def home(path):
     #Obtém o IP real do cliente (prioriza proxies como o Nginx, mas tem o IP diret    o como plano B).
     ip = request.headers.get("X-Forwarded-For", request.remote_addr)
 
+    host = request.headers.get("Host", request.host)
+
     #Mostra o IP formatado na resposta.
-    return f"Seu IP é: {ip}"
+    return f"Seu IP é: {ip}\nSeu Host é: {host}"
 
 #Garante que o servidor só arranca se o ficheiro for executado diretamente.
 if __name__ == "__main__":
